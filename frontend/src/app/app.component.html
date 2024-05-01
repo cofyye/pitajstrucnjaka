@@ -1,0 +1,7 @@
+<p-toast [preventOpenDuplicates]="true"></p-toast>
+<router-outlet></router-outlet>
+<p-progressSpinner
+  ariaLabel="loading"
+  *ngIf="isLoadingPage"
+  class="loading-screen"
+></p-progressSpinner>

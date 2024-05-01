@@ -1,0 +1,32 @@
+<h2>Osnovne informacije</h2>
+<p-divider></p-divider>
+
+<div class="container-fluid">
+  <div class="row" *ngFor="let info of userInformation; let i = index">
+    <div class="col-6">
+      <label>{{ info.label }}</label>
+    </div>
+    <div class="col-6">
+      <ng-container *ngIf="!info.inputVisible; else inputField">
+        <label (click)="edit(i)">{{ info.value }}</label>
+        <i (click)="edit(i)" class="pi pi-pencil ml-1"></i>
+      </ng-container>
+
+      <ng-template #inputField>
+        <input
+          class="input-fix"
+          type="text"
+          pInputText
+          [(ngModel)]="info.value"
+          (blur)="saveInput(i)"
+        />
+        <!-- <p-button
+          icon="pi pi-check"
+          size="small"
+          (click)="saveInput(i)"
+        ></p-button> -->
+      </ng-template>
+    </div>
+    <p-divider class="w-100"></p-divider>
+  </div>
+</div>
