@@ -42,6 +42,7 @@ class FetchGuardService {
               {}
             )
             .pipe(
+              take(1),
               switchMap((response) => {
                 if (response.success) {
                   this._store.dispatch(

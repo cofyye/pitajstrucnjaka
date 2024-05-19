@@ -1,10 +1,10 @@
-<aside id="sidebar">
+<aside id="sidebar" [ngClass]="isSidebarVisible ? 'expand' : ''">
   <div class="d-flex">
     <button class="toggle-btn" type="button">
-      <i class="pi pi-th-large"></i>
+      <i class="pi pi-th-large" (click)="toggleSidebar()"></i>
     </button>
     <div class="sidebar-logo">
-      <a href="#">CodzSword</a>
+      <a (click)="toggleSidebar()">Pitaj Strucnjaka</a>
     </div>
   </div>
   <ul class="sidebar-nav">
@@ -20,36 +20,45 @@
         <span>Profil</span>
       </a>
     </li>
-    <!-- <li class="sidebar-item">
-        <a
-          href="#"
-          class="sidebar-link collapsed has-dropdown"
-          data-bs-toggle="collapse"
-          data-bs-target="#auth"
-          aria-expanded="false"
-          aria-controls="auth"
-        >
-          <i class="lni lni-protection"></i>
-          <span>Auth</span>
-        </a>
-        <ul
-          id="auth"
-          class="sidebar-dropdown list-unstyled collapse"
-          data-bs-parent="#sidebar"
-        >
-          <li class="sidebar-item">
-            <a href="#" class="sidebar-link">Login</a>
-          </li>
-          <li class="sidebar-item">
-            <a href="#" class="sidebar-link">Register</a>
-          </li>
-        </ul>
-      </li> -->
+    <li class="sidebar-item">
+      <a
+        class="sidebar-link collapsed has-dropdown"
+        data-bs-toggle="collapse"
+        data-bs-target="#auth"
+        aria-expanded="false"
+        aria-controls="auth"
+      >
+        <i class="pi pi-clone"></i>
+        <span>Oglasi</span>
+      </a>
+      <ul
+        id="auth"
+        class="sidebar-dropdown list-unstyled collapse"
+        data-bs-parent="#sidebar"
+      >
+        <li class="sidebar-item">
+          <a routerLink="/panel/expert/ads" class="sidebar-link"
+            >Lista oglasa</a
+          >
+        </li>
+        <li class="sidebar-item">
+          <a routerLink="/panel/expert/ads/add" class="sidebar-link"
+            >Dodaj oglas</a
+          >
+        </li>
+      </ul>
+    </li>
+    <li class="sidebar-item">
+      <a routerLink="/panel/expert/chats" class="sidebar-link">
+        <i class="pi pi-comments"></i>
+        <span>Razgovori</span>
+      </a>
+    </li>
   </ul>
   <div class="sidebar-footer">
     <a href="#" class="sidebar-link">
       <i class="pi pi-sign-out"></i>
-      <span>Logout</span>
+      <span>Izlogujte se</span>
     </a>
   </div>
 </aside>

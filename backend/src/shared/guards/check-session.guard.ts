@@ -6,7 +6,7 @@ import { JwtService, TokenExpiredError } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { IJwtPayload } from '../interfaces/jwt.interface';
 import { InjectRepository } from '@nestjs/typeorm';
-import { UserEntity } from 'src/api/user/entities/user.entity';
+import { UserEntity } from 'src/shared/entities/user.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()
@@ -53,10 +53,11 @@ export class CheckSessionGuard extends AuthGuard('jwt') {
           const accessToken = await this._jwtService.signAsync({
             id: payload.id,
           });
+
           res.cookie('access_token', accessToken, {
             httpOnly: true,
-            sameSite: 'strict',
-            secure: false,
+            sameSite: 'none',
+            secure: true,
           });
 
           user = userr as UserEntity;

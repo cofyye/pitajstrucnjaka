@@ -5,7 +5,7 @@ import { ConfigService } from '@nestjs/config';
 import { Request } from 'express';
 import { IJwtPayload } from 'src/shared/interfaces/jwt.interface';
 import { Repository } from 'typeorm';
-import { UserEntity } from 'src/api/user/entities/user.entity';
+import { UserEntity } from 'src/shared/entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { functions } from 'src/shared/utils/functions';
 

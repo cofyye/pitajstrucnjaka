@@ -6,6 +6,4 @@ import { Component, ViewEncapsulation } from '@angular/core';
   styleUrl: './nav.component.css',
   encapsulation: ViewEncapsulation.None,
 })
-export class NavComponent {
-
-}
+export class NavComponent {}

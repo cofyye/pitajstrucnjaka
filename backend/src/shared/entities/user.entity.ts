@@ -1,7 +1,10 @@
+import { AdvertExpertEntity } from 'src/api/advert/entities/advert-expert.entity';
+import { UserRole } from 'src/shared/enums/role.enum';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
@@ -45,8 +48,23 @@ export class UserEntity {
   @Column({ name: 'active', default: false, nullable: false })
   public active: boolean;
 
+  @Column({
+    name: 'role',
+    default: UserRole.USER,
+    nullable: false,
+    type: 'enum',
+    enum: UserRole,
+  })
+  public role: UserRole;
+
   @Column({ name: 'is_expert', default: false, nullable: false })
   public isExpert: boolean;
+
+  @Column({ name: 'profession', nullable: true, length: 100 })
+  public profession: string;
+
+  @Column({ name: 'bio', nullable: true, type: 'text' })
+  public bio: string;
 
   @Column({
     name: 'avatar',
@@ -62,4 +80,7 @@ export class UserEntity {
     nullable: false,
   })
   public registrationDate: Date;
+
+  @OneToMany(() => AdvertExpertEntity, (adExpert) => adExpert.expert)
+  public expert_ads: AdvertExpertEntity[];
 }

@@ -1,0 +1,39 @@
+.addAd {
+  /* background-color: var(--surface-300); */
+  border-radius: 12px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.generalInfo,
+.categorize {
+  border-radius: 12px;
+}
+
+.p-inputtext {
+  font-family: "Lato", sans-serif;
+}
+
+.p-component,
+.p-element {
+  font-size: 0.8rem;
+  font-family: "Lato", sans-serif;
+}
+
+.p-checkbox {
+  display: flex;
+  align-items: center;
+}
+
+.p-checkbox .p-checkbox-box {
+  height: 16px;
+  width: 16px;
+  border-radius: 4px;
+}
+
+.p-fileupload-buttonbar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}

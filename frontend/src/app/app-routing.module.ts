@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { fetchUserGuard } from './shared/guards/fetch-user.guard';
 import { HomeComponent } from './home/home.component';
+import { notAuthenticatedGuard } from './shared/guards/not-authenticated.guard';
 import { authenticatedGuard } from './shared/guards/authenticated.guard';
 
 const routes: Routes = [
@@ -14,16 +15,22 @@ const routes: Routes = [
   {
     path: 'auth',
     canActivate: [fetchUserGuard],
+    canActivateChild: [notAuthenticatedGuard],
     loadChildren: () =>
       import('./features/auth/auth.module').then((m) => m.AuthModule),
   },
   {
     path: 'panel/expert',
-    canActivate: [fetchUserGuard, authenticatedGuard],
+    canActivate: [fetchUserGuard],
+    // canActivateChild: [authenticatedGuard],
     loadChildren: () =>
       import('./features/panel/expert/expert.module').then(
         (m) => m.ExpertModule
       ),
+  },
+  {
+    path: '**',
+    redirectTo: '/',
   },
 ];
 

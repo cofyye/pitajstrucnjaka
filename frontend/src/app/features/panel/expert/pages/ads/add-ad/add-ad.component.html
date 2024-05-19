@@ -1,0 +1,97 @@
+<h3>Dodaj Oglas</h3>
+<p-divider></p-divider>
+<div class="row addAd">
+  <div class="col-md-8" style="display: flex; flex-direction: column">
+    <p-card class="generalInfo mb-3">
+      <h4 class="mt-0">Osnovne informacije</h4>
+
+      <div class="mb-3 d-flex flex-column">
+        <label for="name" class="mb-1">Naslov</label>
+        <input
+          pInputText
+          id="name"
+          aria-describedby="name-help"
+          placeholder="Unesite naslov za Vas oglas."
+          style="font-size: 0.8rem"
+        />
+      </div>
+
+      <div class="mb-3 d-flex flex-column">
+        <label for="adDescription" class="mb-1">Opis</label>
+        <textarea
+          rows="5"
+          cols="30"
+          pInputTextarea
+          [autoResize]="true"
+          placeholder="Unesite opis za Vas oglas."
+          style="font-size: 0.8rem"
+        ></textarea>
+      </div>
+    </p-card>
+
+    <p-card class="categorize">
+      <div class="mb-3 d-flex flex-column gap-2">
+        <h4 class="mb-3 mt-0">Izaberite kategorije</h4>
+        <span class="p-fluid">
+          <p-autoComplete
+            placeholder="Unesite kategorije vezane za Vas oglas."
+            [(ngModel)]="selectedCategories"
+            [suggestions]="suggestedCategories"
+            (completeMethod)="search($event)"
+            [multiple]="true"
+          />
+        </span>
+      </div>
+    </p-card>
+  </div>
+
+  <div class="col-md-4 col-sm-12">
+    <div class="mb-3 d-flex flex-column">
+      <p-card class="mb-3">
+        <h4 class="mt-0">Dodajte slike i video</h4>
+        <p-fileUpload
+          name="demo[]"
+          url="https://www.primefaces.org/cdn/api/upload.php"
+          (onUpload)="onUpload($event)"
+          [multiple]="true"
+          accept="image/*, video/*"
+          maxFileSize="100000000"
+        >
+          <ng-template pTemplate="content">
+            <div *ngIf="uploadedFiles.length == 0" class="drop-area">
+              <p class="d-flex justify-content-center">
+                Prevucite sliku ili video ovde ili kliknite na upload.
+              </p>
+            </div>
+            <ul *ngIf="uploadedFiles.length > 0">
+              <li *ngFor="let file of uploadedFiles">
+                {{ file.name }} - {{ file.size }} bytes
+                <div *ngIf="file.type.includes('image')" class="thumbnail">
+                  <img [src]="getFileSrc(file)" alt="Image" />
+                </div>
+                <div *ngIf="file.type.includes('video')" class="thumbnail">
+                  <video [src]="getFileSrc(file)" controls width="150"></video>
+                </div>
+              </li>
+            </ul>
+          </ng-template>
+        </p-fileUpload>
+      </p-card>
+
+      <p-card>
+        <h4 class="mt-0">Status oglasa</h4>
+        <p-toggleButton
+          [ngModel]="checked"
+          (ngModelChange)="toggleChecked($event)"
+          onLabel="Aktivan"
+          offLabel="Neaktivan"
+        >
+        </p-toggleButton>
+      </p-card>
+
+      <div style="display: flex; justify-content: center; margin-top: 10px">
+        <p-button>Dodaj Oglas</p-button>
+      </div>
+    </div>
+  </div>
+</div>

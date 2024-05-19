@@ -28,6 +28,7 @@ class AuthenticatedService {
     return this._store.select(getUser).pipe(
       take(1),
       map((user) => {
+        console.log(user);
         if (!user.loggedIn) {
           this._messageService.add({
             severity: 'error',

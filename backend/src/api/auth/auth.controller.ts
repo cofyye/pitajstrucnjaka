@@ -16,7 +16,7 @@ import {
 } from 'src/shared/interfaces/response.interface';
 import { AuthService } from './auth.service';
 import { CreateUserDto } from './dtos/create-user.dto';
-import { UserEntity } from '../user/entities/user.entity';
+import { UserEntity } from '../../shared/entities/user.entity';
 import { functions } from 'src/shared/utils/functions';
 import { LoginUserDto } from './dtos/login-user.dto';
 import { ChangePasswordDto } from './dtos/change-password.dto';
@@ -29,7 +29,6 @@ import { ConfigService } from '@nestjs/config';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { NotAuthenticatedGuard } from 'src/shared/guards/not-authenticated.guard';
-import * as moment from 'moment';
 import { ResetPasswordDto } from './dtos/reset-password.dto';
 
 @Controller('/auth')
@@ -107,20 +106,20 @@ export class AuthController {
 
       const accessToken = await this._jwtService.signAsync(payload);
       const refreshToken = await this._jwtService.signAsync(payload, {
-        expiresIn: '1m',
+        expiresIn: '10m',
         secret: this._configService.get<string>('JWT_REFRESH_TOKEN'),
       });
 
       response.cookie('access_token', accessToken, {
         httpOnly: true,
-        sameSite: 'strict',
-        secure: false,
+        sameSite: 'none',
+        secure: true,
       });
 
       response.cookie('refresh_token', refreshToken, {
         httpOnly: true,
-        sameSite: 'strict',
-        secure: false,
+        sameSite: 'none',
+        secure: true,
       });
 
       user.refreshToken = refreshToken;
@@ -234,7 +233,7 @@ export class AuthController {
 
     return {
       success: true,
-      message: 'Uspesno ste izmenili vasu sifru.',
+      message: 'Uspesno ste izmenili Vasu sifru.',
     };
   }
 }

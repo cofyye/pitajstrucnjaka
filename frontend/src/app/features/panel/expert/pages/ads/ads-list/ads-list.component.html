@@ -1,0 +1,43 @@
+<h3>Lista oglasa</h3>
+<p-divider></p-divider>
+<div class="container">
+  <p-selectButton
+    [options]="options"
+    [(ngModel)]="value"
+    optionLabel="name"
+    optionValue="value"
+  />
+  <p-toast />
+  <p-table
+    [value]="ads"
+    selectionMode="single"
+    [(selection)]="selectedProduct"
+    dataKey="code"
+    (onRowSelect)="onRowSelect($event)"
+    (onRowUnselect)="onRowUnselect($event)"
+    [tableStyle]="{ 'min-width': '50rem' }"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Naslov</th>
+        <th>Opis</th>
+        <th>Aktivan</th>
+        <th>Cena</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-ad>
+      <tr [pSelectableRow]="ad">
+        <td>{{ ad.name }}</td>
+        <td>{{ ad.description }}</td>
+        <td>{{ ad.active ? "da" : "ne" }}</td>
+        <td>{{ ad.price + "€" }}</td>
+        <td>
+          <p-button routerLink="edit">Izmeni</p-button>
+        </td>
+        <td></td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

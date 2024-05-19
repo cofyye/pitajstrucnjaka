@@ -1,10 +1,8 @@
 import { Module } from '@nestjs/common';
 import { FileUploadService } from './file-upload.service';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserEntity } from 'src/api/user/entities/user.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([UserEntity])],
+  imports: [],
   providers: [FileUploadService],
   exports: [FileUploadService],
 })

@@ -15,7 +15,7 @@ export class NotAuthenticatedGuard extends AuthGuard('jwt') {
     if (req.cookies['access_token'] || req.cookies['refresh_token']) {
       functions.throwHttpException(
         false,
-        'Zao nam je, nemate dozvolu da pristupite ovoj stranici.',
+        'Morate biti izlogovani da biste pristupili ovoj stranici.',
         HttpStatus.FORBIDDEN,
       );
     }

@@ -8,7 +8,12 @@ import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
 import { join } from 'path';
-import { UserEntity } from './api/user/entities/user.entity';
+import { UserEntity } from './shared/entities/user.entity';
+import { AdvertExpertEntity } from './api/advert/entities/advert-expert.entity';
+import { AdvertClientEntity } from './api/advert/entities/advert-client.entity';
+import { AdvertModule } from './api/advert/advert.module';
+import { TagEntity } from './shared/entities/tag.entity';
+import { AdminModule } from './api/admin/admin.module';
 
 @Module({
   imports: [
@@ -26,7 +31,12 @@ import { UserEntity } from './api/user/entities/user.entity';
           password: configService.get<string>('DB_PASSWORD'),
           database: configService.get<string>('DB_DATABASE'),
           synchronize: true,
-          entities: [UserEntity],
+          entities: [
+            UserEntity,
+            TagEntity,
+            AdvertExpertEntity,
+            AdvertClientEntity,
+          ],
         };
       },
     }),
@@ -63,8 +73,10 @@ import { UserEntity } from './api/user/entities/user.entity';
         expiresIn: '10s',
       },
     }),
-    AuthModule,
+    AdminModule,
     UserModule,
+    AuthModule,
+    AdvertModule,
   ],
   controllers: [],
   providers: [],

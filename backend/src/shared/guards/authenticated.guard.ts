@@ -6,7 +6,7 @@ import { JwtService, TokenExpiredError } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { IJwtPayload } from '../interfaces/jwt.interface';
 import { InjectRepository } from '@nestjs/typeorm';
-import { UserEntity } from 'src/api/user/entities/user.entity';
+import { UserEntity } from 'src/shared/entities/user.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()
@@ -49,7 +49,7 @@ export class AuthenticatedGuard extends AuthGuard('jwt') {
           if (!userr || userr.refreshToken != req.cookies['refresh_token']) {
             functions.throwHttpException(
               false,
-              'Zao nam je, nemate dozvolu da pristupite ovoj stranici.',
+              'Morate biti ulogovani da biste pristupili ovoj stranici 1.',
               HttpStatus.UNAUTHORIZED,
             );
           }
@@ -59,15 +59,15 @@ export class AuthenticatedGuard extends AuthGuard('jwt') {
           });
           res.cookie('access_token', accessToken, {
             httpOnly: true,
-            sameSite: 'strict',
-            secure: false,
+            sameSite: 'none',
+            secure: true,
           });
 
           user = userr as UserEntity;
         } else {
           functions.throwHttpException(
             false,
-            'Zao nam je, nemate dozvolu da pristupite ovoj stranici.',
+            'Morate biti ulogovani da biste pristupili ovoj stranici 2.',
             HttpStatus.UNAUTHORIZED,
           );
         }
@@ -76,7 +76,7 @@ export class AuthenticatedGuard extends AuthGuard('jwt') {
       if (!user) {
         functions.throwHttpException(
           false,
-          'Zao nam je, nemate dozvolu da pristupite ovoj stranici.',
+          'Morate biti ulogovani da biste pristupili ovoj stranici 3.',
           HttpStatus.UNAUTHORIZED,
         );
       }
@@ -89,7 +89,7 @@ export class AuthenticatedGuard extends AuthGuard('jwt') {
       functions.handleHttpException(
         err,
         false,
-        'Zao nam je, nemate dozvolu da pristupite ovoj stranici.',
+        'Morate biti ulogovani da biste pristupili ovoj stranici.',
       );
     }
   }

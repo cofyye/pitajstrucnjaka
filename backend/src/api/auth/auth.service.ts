@@ -1,6 +1,6 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dtos/create-user.dto';
-import { UserEntity } from '../user/entities/user.entity';
+import { UserEntity } from '../../shared/entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
@@ -56,7 +56,7 @@ export class AuthService {
       const salt = await bcrypt.genSalt(10);
       const password = await bcrypt.hash(user.password, salt);
 
-      filename = await this._fileUploadService.uploadFile(avatar);
+      filename = await this._fileUploadService.uploadImage('avatar', avatar);
 
       if (!filename) {
         functions.throwHttpException(
@@ -202,7 +202,7 @@ export class AuthService {
         functions.throwHttpException(
           false,
           'Nalog sa ovom e-mail adresom ne postoji.',
-          HttpStatus.CONFLICT,
+          HttpStatus.NOT_FOUND,
         );
       }
 
@@ -254,7 +254,7 @@ export class AuthService {
         functions.throwHttpException(
           false,
           'Nalog sa ovom e-mail adresom ne postoji.',
-          HttpStatus.CONFLICT,
+          HttpStatus.NOT_FOUND,
         );
       }
 

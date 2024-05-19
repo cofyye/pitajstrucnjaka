@@ -1,0 +1,38 @@
+/* Custom CSS */
+.chat-list {
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.chat-list-item {
+  cursor: pointer;
+}
+
+.chat-content {
+  height: 100vh;
+}
+
+/* Styling for active chat item */
+.chat-list-item.active {
+  background-color: #007bff;
+  color: #fff;
+}
+
+/* Styling for default content */
+.default-content {
+  text-align: center;
+  padding-top: 50px;
+  font-size: 20px;
+  color: #555;
+}
+
+.chat-list-item {
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.chat-list-item:hover {
+  background-color: #e0e0e0; /* Slightly darker background on hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow on hover */
+}
