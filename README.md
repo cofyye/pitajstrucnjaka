@@ -20,12 +20,23 @@ Za stručnjake, PitajStrucnjaka pruža dragocenu priliku da dopru do šire publi
 
 Nažalost, zbog brojnih bagova i tehničkih problema, projekat je depreciran i arhiviran. Naš tim je posvećen rešavanju ovih problema i planiramo da oživimo projekat u budućnosti. Cenimo vaše razumevanje i strpljenje dok radimo na poboljšanju platforme.
 
+## Technologies Used
+
+- NestJS
+- Angular
+- TypeORM
+- MariaDB
+- PassportJS
+- BCRYPT
+- NodeMailer
+- Socket.IO
+
 ## Credits
 
 The following people have contributed to this project:
 
-- Ilija Ivanovic
-- Aleksa Ilic
-- princeps1
-- Andjela Mia Doncov
-- cofyye
+- <a href="#">Ilija Ivanovic</a>
+- <a href="https://github.com/AleksaIlicc">Aleksa Ilic</a>
+- <a href="https://github.com/princeps1">princeps1</a>
+- <a href="https://github.com/andjelaadoncov">Andjela Mia Doncov</a>
+- <a href="https://github.com/cofyye">cofyye</a>
